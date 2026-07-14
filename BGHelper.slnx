@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="bghelper.client/bghelper.client.esproj">
+    <Build />
+    <Deploy />
+  </Project>
+  <Project Path="BGHelper.Server/BGHelper.Server.csproj" />
+</Solution>
