@@ -1,4 +1,7 @@
 import { useRegisterSW } from 'virtual:pwa-register/react';
+import { Route, Routes } from 'react-router';
+import HomePage from './HomePage';
+import BoardGameRulesPage from './rules/BoardGameRulesPage';
 import './App.css';
 
 function App() {
@@ -9,11 +12,15 @@ function App() {
     } = useRegisterSW();
 
     return (
-        <main className="home">
-            <h1>Board Game Helper</h1>
-            <button className="primary-action" type="button">
-                Board Game Rules
-            </button>
+        <>
+            <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route
+                    path="/rules"
+                    element={<BoardGameRulesPage />}
+                />
+            </Routes>
+
             {(offlineReady || needRefresh) && (
                 <aside className="pwa-notice" role="status" aria-live="polite">
                     <span>
@@ -40,7 +47,7 @@ function App() {
                     </div>
                 </aside>
             )}
-        </main>
+        </>
     );
 }
 
