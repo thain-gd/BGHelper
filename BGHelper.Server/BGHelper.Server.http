@@ -1,6 +1,0 @@
-@BGHelper.Server_HostAddress = http://localhost:5073
-
-GET {{BGHelper.Server_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

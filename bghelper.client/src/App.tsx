@@ -1,58 +1,47 @@
-import { useEffect, useState } from 'react';
+import { useRegisterSW } from 'virtual:pwa-register/react';
 import './App.css';
 
-interface Forecast {
-    date: string;
-    temperatureC: number;
-    temperatureF: number;
-    summary: string;
-}
-
 function App() {
-    const [forecasts, setForecasts] = useState<Forecast[]>();
-
-    useEffect(() => {
-        populateWeatherData();
-    }, []);
-
-    const contents = forecasts === undefined
-        ? <p><em>Loading... Please refresh once the ASP.NET backend has started. See <a href="https://aka.ms/jspsintegrationreact">https://aka.ms/jspsintegrationreact</a> for more details.</em></p>
-        : <table className="table table-striped" aria-labelledby="tableLabel">
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Temp. (C)</th>
-                    <th>Temp. (F)</th>
-                    <th>Summary</th>
-                </tr>
-            </thead>
-            <tbody>
-                {forecasts.map(forecast =>
-                    <tr key={forecast.date}>
-                        <td>{forecast.date}</td>
-                        <td>{forecast.temperatureC}</td>
-                        <td>{forecast.temperatureF}</td>
-                        <td>{forecast.summary}</td>
-                    </tr>
-                )}
-            </tbody>
-        </table>;
+    const {
+        needRefresh: [needRefresh, setNeedRefresh],
+        offlineReady: [offlineReady, setOfflineReady],
+        updateServiceWorker,
+    } = useRegisterSW();
 
     return (
-        <div>
-            <h1 id="tableLabel">Weather forecast</h1>
-            <p>This component demonstrates fetching data from the server.</p>
-            {contents}
-        </div>
+        <main className="home">
+            <h1>Board Game Helper</h1>
+            <button className="primary-action" type="button">
+                Board Game Rules
+            </button>
+            {(offlineReady || needRefresh) && (
+                <aside className="pwa-notice" role="status" aria-live="polite">
+                    <span>
+                        {offlineReady
+                            ? 'BGHelper is ready to use offline.'
+                            : 'A new version of BGHelper is available.'}
+                    </span>
+                    <div className="pwa-actions">
+                        {needRefresh && (
+                            <button type="button" onClick={() => void updateServiceWorker(true)}>
+                                Update
+                            </button>
+                        )}
+                        <button
+                            type="button"
+                            className="secondary"
+                            onClick={() => {
+                                setOfflineReady(false);
+                                setNeedRefresh(false);
+                            }}
+                        >
+                            Close
+                        </button>
+                    </div>
+                </aside>
+            )}
+        </main>
     );
-
-    async function populateWeatherData() {
-        const response = await fetch('weatherforecast');
-        if (response.ok) {
-            const data = await response.json();
-            setForecasts(data);
-        }
-    }
 }
 
 export default App;

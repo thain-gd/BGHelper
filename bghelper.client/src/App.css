@@ -5,7 +5,77 @@
     text-align: center;
 }
 
-th, td {
-    padding-left: 1rem;
-    padding-right: 1rem;
+.home {
+    display: grid;
+    justify-items: center;
+    gap: 1.5rem;
+}
+
+.primary-action {
+    padding: 0.75rem 1.1rem;
+    color: white;
+    background: var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: 0.65rem;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.primary-action:hover {
+    filter: brightness(1.08);
+}
+
+.primary-action:focus-visible {
+    outline: 3px solid var(--accent-border);
+    outline-offset: 3px;
+}
+
+.pwa-notice {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    left: 1rem;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    max-width: 40rem;
+    margin-inline: auto;
+    padding: 0.9rem 1rem;
+    color: var(--text-h);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    box-shadow: var(--shadow);
+    text-align: left;
+}
+
+.pwa-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.pwa-actions button {
+    padding: 0.55rem 0.8rem;
+    color: white;
+    background: var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: 0.5rem;
+    font: inherit;
+    cursor: pointer;
+}
+
+.pwa-actions button.secondary {
+    color: var(--text-h);
+    background: transparent;
+    border-color: var(--border);
+}
+
+@media (max-width: 520px) {
+    .pwa-notice {
+        align-items: stretch;
+        flex-direction: column;
+    }
 }

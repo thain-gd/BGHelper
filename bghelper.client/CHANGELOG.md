@@ -5,12 +5,11 @@ The following tools were used to generate this project:
 
 The following steps were used to generate this project:
 - Create react project with create-vite: `npm init --yes vite@latest bghelper.client -- --template=react-ts  --no-rolldown --no-immediate`.
-- Update `vite.config.ts` to set up proxying and certs.
+- Update `vite.config.ts` to set up local HTTPS certificates and PWA support.
 - Add `@type/node` for `vite.config.js` typing.
-- Update `App` component to fetch and display weather information.
+- Create the Board Game Helper app shell.
 - Create project file (`bghelper.client.esproj`).
 - Create `launch.json` to enable debugging.
 - Add project to solution.
-- Update proxy endpoint to be the backend server endpoint.
 - Add project to the startup projects list.
 - Write this file.
